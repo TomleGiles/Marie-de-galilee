@@ -4,7 +4,7 @@ const { useState, useEffect, useRef } = React;
 
 // ───── Tweak defaults (writable by host) ─────
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-  "palette": ["#1a5837", "#e8a93c", "#faf7ef"],
+  "palette": ["#3d2845", "#e8a93c", "#faf5e8"],
   "heroLayout": "split",
   "etabAccent": "varied",
   "valueIcons": "geometric",
@@ -137,10 +137,10 @@ function Reveal({ children, delay = 0, as: Tag = "div", ...rest }) {
 }
 
 function Logo({ light = false, variant = "primary" }) {
-  const src = variant === "alt" ? "assets/logo-mdg.png" : "assets/logo-beau-jardin.png";
+  const src = variant === "alt" ? "assets/logo-beau-jardin.png" : "assets/logo-mdg.png";
   return (
     <a href="#" className={`logo logo-img ${light ? "logo-light" : ""}`} aria-label="Ensemble scolaire Marie de Galilée">
-      <img src={src} alt="Ensemble scolaire Marie de Galilée — Lycée Beau Jardin" />
+      <img src={src} alt="Ensemble scolaire Marie de Galilée" />
     </a>
   );
 }
@@ -188,18 +188,280 @@ function Arrow() {
   );
 }
 
+// ───── Tarifs data ─────
+const ETAB_TARIFS = [
+  {
+    name: "Externat Sainte-Thérèse",
+    levels: "Maternelle · Primaire — Raon-l'Étape",
+    accent: "var(--acc-marine)",
+    rates: [
+      { label: "Contribution scolaire annuelle", indic: true, value: "Sur demande", unit: "selon QF" },
+      { label: "Restauration & garderie", indic: true, value: "Sur demande", unit: "" }
+    ],
+    notes: [
+      <span><strong>Tarifs modulés selon le quotient familial</strong>. Réductions appliquées à partir du 2ᵉ enfant. Prendre contact avec la direction pour un devis personnalisé.</span>
+    ],
+    contact: { tel: "03 29 41 44 43", url: "https://externat-saintetherese.fr/", urlLabel: "externat-saintetherese.fr" }
+  },
+  {
+    name: "Institution Sainte-Marie",
+    levels: "Maternelle · Primaire · Collège — Saint-Dié",
+    accent: "var(--acc-brown)",
+    rates: [
+      { label: "Contribution scolaire annuelle", indic: true, value: "Sur demande", unit: "facturation en septembre" },
+      { label: "Repas occasionnel au self", value: "6,35 €", unit: "/ repas" },
+      { label: "Garderie matinale", value: "2 €", unit: "/ heure (ou 1 € / 30 min)" }
+    ],
+    notes: [
+      <span><strong>Facture annuelle prélevée sur 10 mois</strong>, d'octobre à juillet. Garderie disponible de 7h30 à 18h45, étude du soir incluse.</span>,
+      <span>Les absences pour convenances personnelles ne sont pas remboursées.</span>
+    ],
+    contact: { tel: "03 29 55 34 66", url: "https://www.saintemarie-stdie.fr/", urlLabel: "saintemarie-stdie.fr" }
+  },
+  {
+    name: "Notre-Dame de la Providence",
+    levels: "École · Collège · Lycée pro — Saint-Dié",
+    accent: "var(--acc-violet)",
+    rates: [
+      { label: "Contribution scolaire", indic: true, value: "4 tranches QF", unit: "école & lycée pro · 3 tranches collège" },
+      { label: "Restauration · 4 repas / sem.", value: "102 €", unit: "/ mois" },
+      { label: "Repas avec Cité-PASS", value: "75 — 94 €", unit: "/ mois · Déodatiens" },
+      { label: "Repas occasionnel Cité-PASS", value: "5,30 — 6,60 €", unit: "/ repas" },
+      { label: "Garderie matin · 7h15-7h45", value: "103 €", unit: "/ an" },
+      { label: "Étude du soir · 16h30-18h30", value: "205 — 411 €", unit: "/ an · selon créneau" }
+    ],
+    notes: [
+      <span><strong>Tarifs différenciés selon le quotient familial</strong> à partir de la rentrée 2024. Quatre tranches pour l'école et le lycée pro, trois tranches pour le collège.</span>,
+      <span>La <strong>Carte Cité-PASS</strong> permet aux enfants domiciliés à Saint-Dié de bénéficier de tarifs modulés sur la restauration.</span>
+    ],
+    contact: { tel: "03 29 56 96 53", url: "https://institutionlaprovidence.fr/accueil/", urlLabel: "institutionlaprovidence.fr" }
+  },
+  {
+    name: "Lycée Beau Jardin",
+    levels: "2ⁿᵈᵉ · 1ʳᵉ · Tle · BTS — Saint-Dié",
+    accent: "var(--acc-green)",
+    rates: [
+      { label: "Contribution scolaire annuelle", indic: true, value: "Sur demande", unit: "selon filière (général · STMG · BTS)" },
+      { label: "Demi-pension au self", indic: true, value: "Sur demande", unit: "" },
+      { label: "Internat (60 places)", indic: true, value: "Sur demande", unit: "filles & garçons" }
+    ],
+    notes: [
+      <span>Établissement <strong>sous contrat d'association</strong> avec l'État. Les <strong>bourses nationales du second degré</strong> et les bourses au mérite sont accessibles aux familles éligibles.</span>,
+      <span>L'internat accueille également les élèves de Notre-Dame de la Providence.</span>
+    ],
+    contact: { tel: "03 29 56 13 52", url: "https://www.lycee-beaujardin.fr/", urlLabel: "lycee-beaujardin.fr" }
+  }
+];
+
+const PRINCIPLES = [
+  { num: "01", title: "Sous contrat d'association", desc: "L'État rémunère les enseignants. Les familles contribuent uniquement aux frais de fonctionnement et au caractère propre de l'établissement." },
+  { num: "02", title: "Tarifs modulés selon le QF", desc: "Plusieurs tranches selon le quotient familial : chaque famille paie selon ses moyens, dans un esprit de solidarité éducative." },
+  { num: "03", title: "Réductions fratries", desc: "Tarifs dégressifs à partir du deuxième enfant scolarisé dans l'ensemble. Le coût ne doit jamais empêcher une scolarité." }
+];
+
+const AIDES = [
+  {
+    num: "01",
+    title: "Bourses nationales",
+    desc: "Pour les collégiens et lycéens, sur demande auprès du secrétariat en début d'année. Les barèmes sont fixés par l'Éducation nationale.",
+    items: ["Bourse de collège", "Bourse de lycée", "Bourse au mérite", "Prime à l'internat"]
+  },
+  {
+    num: "02",
+    title: "Bourses internes & fonds de solidarité",
+    desc: "Les établissements disposent d'un fonds de solidarité pour accompagner les familles en difficulté ponctuelle. Demande confidentielle auprès du chef d'établissement.",
+    items: ["Étude au cas par cas", "Aide aux voyages scolaires", "Soutien à la scolarité", "Contact direct & confidentiel"]
+  },
+  {
+    num: "03",
+    title: "Carte Cité-PASS",
+    desc: "Réservée aux familles domiciliées à Saint-Dié-des-Vosges, la Carte Cité-PASS module le coût de la restauration scolaire selon le quotient familial.",
+    items: ["Lettre A — tarif réduit", "Lettre B, C, D — tranches intermédiaires", "À demander en début d'année", "Cumulable avec les bourses"]
+  },
+  {
+    num: "04",
+    title: "Réductions fratries",
+    desc: "Lorsque plusieurs enfants d'une même famille sont scolarisés dans l'ensemble Marie de Galilée, des réductions s'appliquent automatiquement sur la contribution des cadets.",
+    items: ["2ᵉ enfant — réduction", "3ᵉ enfant — réduction renforcée", "Application automatique", "Aucune démarche supplémentaire"]
+  }
+];
+
+// ───── Tarifs page ─────
+function TarifsPage() {
+  return (
+    <>
+      <section className="tarifs-hero">
+        <div className="wrap tarifs-hero-grid">
+          <Reveal>
+            <span className="eyebrow">Tarifs &amp; inscriptions · 2026 — 2027</span>
+            <h1>
+              Une scolarité <span className="accent">accessible</span>,<br />
+              modulée selon les ressources.
+            </h1>
+            <p className="lede">
+              Marie de Galilée est un ensemble catholique sous contrat d'association avec l'État.
+              Les contributions familiales financent uniquement le fonctionnement et le caractère
+              propre — modulées par le quotient familial pour rester accessibles à tous.
+            </p>
+          </Reveal>
+          <Reveal delay={120}>
+            <dl className="tarifs-hero-side">
+              <dt>Statut</dt>
+              <dd>Enseignement catholique sous contrat d'association avec l'État</dd>
+              <dt>Modulation</dt>
+              <dd>Tarifs différenciés selon le quotient familial (3 ou 4 tranches)</dd>
+              <dt>Aides</dt>
+              <dd>Bourses nationales · fonds de solidarité interne · Carte Cité-PASS</dd>
+              <dt>Inscriptions</dt>
+              <dd>Ouvertes — rendez-vous auprès de chaque établissement</dd>
+            </dl>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="principles">
+        <div className="wrap">
+          <Reveal className="principles-head">
+            <span className="eyebrow">Principes</span>
+            <h2 className="h-section" style={{ marginTop: 14 }}>
+              Trois engagements <em style={{ color: "var(--gold-warm)" }}>de transparence</em>.
+            </h2>
+          </Reveal>
+          <div className="principles-grid">
+            {PRINCIPLES.map((p, i) => (
+              <Reveal key={p.num} delay={i * 80} className="principle">
+                <span className="principle-num">{p.num}</span>
+                <h3>{p.title}</h3>
+                <p>{p.desc}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="etab-tarifs">
+        <div className="wrap">
+          <Reveal className="etab-tarifs-head">
+            <span className="eyebrow">Par établissement</span>
+            <h2 className="h-section" style={{ marginTop: 14 }}>
+              Tarifs <em style={{ color: "var(--gold-warm)" }}>indicatifs</em> par établissement.
+            </h2>
+            <p className="lede" style={{ marginTop: 14 }}>
+              Les montants ci-dessous sont communiqués à titre informatif. Pour un devis personnalisé
+              tenant compte de votre quotient familial et du nombre d'enfants, contactez directement
+              l'établissement concerné.
+            </p>
+          </Reveal>
+          {ETAB_TARIFS.map((e, i) => (
+            <Reveal key={e.name} className="etab-tarif" style={{ "--accent": e.accent }}>
+              <div className="etab-tarif-id">
+                <span className="num">0{i + 1} / 04</span>
+                <h3>{e.name}</h3>
+                <span className="levels">{e.levels}</span>
+                <span className="accent-bar"></span>
+                <div className="contact">
+                  {e.contact.tel}<br />
+                  <a href={e.contact.url} target="_blank" rel="noopener noreferrer">{e.contact.urlLabel} <Arrow /></a>
+                </div>
+              </div>
+              <div className="etab-tarif-rates">
+                {e.rates.map((r, j) => (
+                  <div className="row" key={j}>
+                    <span className="label">
+                      {r.label}
+                    </span>
+                    <span className={`value ${r.indic ? "indicative" : ""}`}>
+                      {r.value}
+                      {r.unit && <span className="unit">{r.unit}</span>}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <div className="etab-tarif-notes">
+                {e.notes.map((n, j) => (
+                  <p className="note" key={j}>{n}</p>
+                ))}
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      <section className="aides">
+        <div className="wrap">
+          <Reveal className="aides-head">
+            <span className="eyebrow">Aides &amp; accompagnement</span>
+            <h2 className="h-section" style={{ marginTop: 14 }}>
+              Aucune famille <em style={{ color: "var(--gold-warm)" }}>laissée seule</em>.
+            </h2>
+            <p className="lede">
+              Le coût de la scolarité ne doit jamais constituer un frein. Plusieurs dispositifs,
+              cumulables, permettent à chaque famille d'accéder à l'enseignement de son choix.
+            </p>
+          </Reveal>
+          <div className="aides-grid">
+            {AIDES.map((a, i) => (
+              <Reveal key={a.num} delay={i * 80} className="aide">
+                <span className="aide-num">{a.num}</span>
+                <h4>{a.title}</h4>
+                <p>{a.desc}</p>
+                <ul>
+                  {a.items.map((it, j) => <li key={j}>{it}</li>)}
+                </ul>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="tarif-disclaimer">
+        <div className="wrap">
+          <div className="tarif-disclaimer-inner">
+            <svg className="icon" width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <circle cx="11" cy="11" r="9" stroke="currentColor" strokeWidth="1.4" />
+              <path d="M11 7v5M11 14.5v.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+            </svg>
+            <p>
+              <strong>Information importante.</strong> Les tarifs publiés ici sont communiqués à titre
+              indicatif d'après les informations officielles de chaque établissement (rentrée 2024 — 2025
+              et suivantes). Ils peuvent évoluer chaque année. Pour un devis nominatif et personnalisé
+              tenant compte de votre situation familiale, merci de prendre directement attache avec la
+              direction de l'établissement concerné — un rendez-vous vous sera proposé dans les meilleurs
+              délais.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <Inscription />
+    </>
+  );
+}
+
 // ───── Sections ─────
-function Nav({ open, setOpen }) {
+function Nav({ open, setOpen, route }) {
+  const navTo = (e, target) => {
+    if (route === 'tarifs') {
+      e.preventDefault();
+      window.location.hash = '';
+      setTimeout(() => {
+        const el = document.getElementById(target);
+        if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 90, behavior: 'smooth' });
+      }, 60);
+    }
+  };
   return (
     <header className="nav">
       <div className="wrap nav-inner">
-        <Logo />
+        <a href="#" onClick={(e)=>{e.preventDefault();window.location.hash='';window.scrollTo({top:0,behavior:'smooth'})}} className="logo logo-img" aria-label="Ensemble scolaire Marie de Galilée">
+          <img src="assets/logo-mdg.png" alt="Ensemble scolaire Marie de Galilée" />
+        </a>
         <nav className={`nav-links ${open ? "open" : ""}`} onClick={() => setOpen(false)}>
-          <a href="#etablissements">Nos établissements</a>
-          <a href="#valeurs">Nos valeurs</a>
-          <a href="#actualites">Actualités</a>
-          <a href="#contact">Contact</a>
-          <a href="#inscription" className="nav-cta">Inscription</a>
+          <a href="#etablissements" onClick={(e)=>navTo(e,'etablissements')}>Nos établissements</a>
+          <a href="#valeurs" onClick={(e)=>navTo(e,'valeurs')}>Nos valeurs</a>
+          <a href="#tarifs" className={route==='tarifs'?'active':''}>Tarifs</a>
+          <a href="#contact" onClick={(e)=>navTo(e,'contact')}>Contact</a>
+          <a href="#inscription" className="nav-cta" onClick={(e)=>navTo(e,'inscription')}>Inscription</a>
         </nav>
         <button
           className={`nav-burger ${open ? "open" : ""}`}
@@ -503,11 +765,11 @@ function Tweaks({ t, setTweak }) {
         label="Palette"
         value={t.palette}
         options={[
+          ["#3d2845", "#e8a93c", "#faf5e8"],
+          ["#2d1f15", "#e8a93c", "#f7f0db"],
+          ["#1a1612", "#e8a93c", "#faf6ec"],
           ["#1a5837", "#e8a93c", "#faf7ef"],
-          ["#0f4429", "#d99a2b", "#f7f3e8"],
-          ["#1a2744", "#c8a96e", "#faf7f2"],
-          ["#2c2c2c", "#e8a93c", "#f7f3e8"],
-          ["#5a2a2a", "#e8a93c", "#faf6ef"]
+          ["#3d2540", "#d49680", "#faf3ee"]
         ]}
         onChange={(v) => setTweak("palette", v)}
       />
@@ -540,10 +802,23 @@ function Tweaks({ t, setTweak }) {
   );
 }
 
+// ───── Hash route ─────
+function useHashRoute() {
+  const [hash, setHash] = useState(() => window.location.hash || '');
+  useEffect(() => {
+    const onHash = () => setHash(window.location.hash || '');
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+  }, []);
+  return hash === '#tarifs' ? 'tarifs' : 'home';
+}
+
 // ───── App ─────
 function App() {
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
   const [navOpen, setNavOpen] = useState(false);
+  const route = useHashRoute();
+  useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' }); }, [route]);
 
   // Apply palette
   useEffect(() => {
@@ -556,15 +831,15 @@ function App() {
     r.setProperty("--ivory", t.palette[2]);
     r.setProperty("--ivory-2", shade(t.palette[2], -5));
     r.setProperty("--ink", t.palette[0]);
-    r.setProperty("--acc-marine", t.etabAccent === "marine" ? t.palette[0] : "#1a2744");
+    r.setProperty("--acc-marine", t.etabAccent === "marine" ? t.palette[0] : "#4a8a9e");
     if (t.etabAccent === "marine") {
       r.setProperty("--acc-brown", t.palette[0]);
       r.setProperty("--acc-green", t.palette[0]);
       r.setProperty("--acc-violet", t.palette[0]);
     } else {
-      r.setProperty("--acc-brown", "#7a5a3f");
-      r.setProperty("--acc-green", "#3f6b4e");
-      r.setProperty("--acc-violet", "#5d4a7a");
+      r.setProperty("--acc-brown", "#d49680");
+      r.setProperty("--acc-green", "#5a8859");
+      r.setProperty("--acc-violet", "#7d5c95");
     }
   }, [t.palette, t.etabAccent]);
 
@@ -590,16 +865,20 @@ function App() {
 
   return (
     <>
-      <Nav open={navOpen} setOpen={setNavOpen} />
+      <Nav open={navOpen} setOpen={setNavOpen} route={route} />
       <main>
-        {t.heroLayout === "centré"
-          ? <HeroCentered showFloating={t.showFloatingCard} />
-          : <Hero showFloating={t.showFloatingCard} />}
-        <Stats />
-        <Etablissements />
-        <Valeurs />
-        <Testimonial />
-        <Inscription />
+        {route === 'tarifs' ? <TarifsPage /> : (
+          <>
+            {t.heroLayout === "centré"
+              ? <HeroCentered showFloating={t.showFloatingCard} />
+              : <Hero showFloating={t.showFloatingCard} />}
+            <Stats />
+            <Etablissements />
+            <Valeurs />
+            <Testimonial />
+            <Inscription />
+          </>
+        )}
       </main>
       <Footer />
       <Tweaks t={t} setTweak={setTweak} />
