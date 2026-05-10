@@ -4,7 +4,7 @@ const { useState, useEffect, useRef } = React;
 
 // ───── Tweak defaults (writable by host) ─────
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-  "palette": ["#3d2845", "#e8a93c", "#faf5e8"],
+  "palette": ["#2d1f15", "#e8a93c", "#f7f0db"],
   "heroLayout": "split",
   "etabAccent": "varied",
   "valueIcons": "geometric",
