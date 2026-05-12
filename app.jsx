@@ -22,7 +22,7 @@ const ETABLISSEMENTS = [
     url: "https://externat-saintetherese.fr/",
     accent: "var(--acc-marine)",
     tone: "tone-marine",
-    placeholder: "Externat Sainte-Thérèse"
+    img: "https://images.pexels.com/photos/8087869/pexels-photo-8087869.jpeg?auto=compress&cs=tinysrgb&w=600"
   },
   {
     name: "Institution Sainte-Marie",
@@ -32,17 +32,17 @@ const ETABLISSEMENTS = [
     url: "https://www.saintemarie-stdie.fr/",
     accent: "var(--acc-brown)",
     tone: "tone-warm",
-    placeholder: "Sainte-Marie"
+    img: "https://images.pexels.com/photos/8466783/pexels-photo-8466783.jpeg?auto=compress&cs=tinysrgb&w=600"
   },
   {
     name: "Institution Notre-Dame de la Providence",
-    levels: "École · Collège · Lycée pro",
+    levels: "Collège · Lycée pro",
     addr: "14 rue Pasteur\n88100 Saint-Dié-des-Vosges",
     tel: "03 29 56 13 12",
     url: "https://institutionlaprovidence.fr/accueil/",
     accent: "var(--acc-violet)",
     tone: "tone-violet",
-    placeholder: "La Providence"
+    img: "https://images.pexels.com/photos/27093997/pexels-photo-27093997.jpeg?auto=compress&cs=tinysrgb&w=600"
   },
   {
     name: "Lycée Beau Jardin",
@@ -52,7 +52,7 @@ const ETABLISSEMENTS = [
     url: "https://www.lycee-beaujardin.fr/",
     accent: "var(--acc-green)",
     tone: "tone-green",
-    placeholder: "Lycée Beau Jardin"
+    img: "https://images.pexels.com/photos/5676667/pexels-photo-5676667.jpeg?auto=compress&cs=tinysrgb&w=600"
   }
 ];
 
@@ -87,17 +87,20 @@ const TESTIMONIALS = [
   {
     quote: "Nous avons trouvé bien plus qu'une école : une vraie communauté éducative où nos enfants grandissent en confiance, encadrés par des adultes qui les connaissent et les portent.",
     author: "Famille Lemaître",
-    role: "Parents de trois élèves · École Sainte-Jeanne d'Arc & Collège Saint-Joseph"
+    role: "Parents de trois élèves · École Sainte-Jeanne d'Arc & Collège Saint-Joseph",
+    img: "https://images.pexels.com/photos/5896500/pexels-photo-5896500.jpeg?auto=compress&cs=tinysrgb&w=600"
   },
   {
     quote: "Le suivi pendant les années lycée a été exceptionnel. Chaque professeur connaissait notre fille, ses forces, ses doutes — elle est arrivée à son BTS pleinement préparée et confiante.",
     author: "Madame Berthier",
-    role: "Maman d'une ancienne élève · Lycée Notre-Dame"
+    role: "Maman d'une ancienne élève · Lycée Notre-Dame",
+    img: "https://images.pexels.com/photos/8489355/pexels-photo-8489355.jpeg?auto=compress&cs=tinysrgb&w=600"
   },
   {
     quote: "Ce qui nous a touchés, c'est cette attention au cœur et à l'esprit. Nos enfants reviennent chaque jour avec quelque chose à raconter, à questionner, à partager.",
     author: "Famille Rousset",
-    role: "Parents · École Sainte-Anne, Raon-l'Étape"
+    role: "Parents · École Sainte-Anne, Raon-l'Étape",
+    img: "https://images.pexels.com/photos/4452215/pexels-photo-4452215.jpeg?auto=compress&cs=tinysrgb&w=600"
   }
 ];
 
@@ -504,16 +507,7 @@ function Hero({ showFloating }) {
         </Reveal>
         <Reveal delay={150}>
           <div className="hero-img-wrap">
-            <Placeholder label="Photo d'ambiance — enfants en classe" />
-            {showFloating && (
-              <div className="hero-floating">
-                <div className="stamp">98%</div>
-                <p>
-                  <strong>Réussite au Bac 2025</strong>
-                  Lycée Notre-Dame, toutes filières confondues
-                </p>
-              </div>
-            )}
+            <img src="https://images.pexels.com/photos/8617970/pexels-photo-8617970.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Élèves en classe" style={{width:'100%',height:'100%',objectFit:'cover',display:'block'}} />
           </div>
         </Reveal>
       </div>
@@ -565,7 +559,7 @@ function Etablissements() {
             <Reveal key={e.name} delay={i * 80}>
               <article className="etab" style={{ "--accent": e.accent }}>
                 <div className="etab-img">
-                  <Placeholder tone={e.tone} label={e.placeholder} />
+                  <img src={e.img} alt={e.name} style={{width:'100%',height:'100%',objectFit:'cover',display:'block'}} />
                 </div>
                 <div className="etab-body">
                   <span className="etab-levels">{e.levels}</span>
@@ -625,7 +619,7 @@ function Testimonial() {
       <div className="wrap testimonial-grid">
         <Reveal>
           <div className="testimonial-img">
-            <Placeholder tone="tone-warm" label="Portrait parent" />
+            <img src={t.img} alt={t.author} style={{width:'100%',height:'100%',objectFit:'cover',display:'block'}} />
           </div>
         </Reveal>
         <Reveal delay={120}>
@@ -912,8 +906,8 @@ function HeroCentered({ showFloating }) {
           </div>
         </Reveal>
         <Reveal delay={150}>
-          <div style={{ marginTop: 64, aspectRatio: "16/7", position: "relative" }}>
-            <Placeholder label="Photo d'ambiance — vie scolaire" />
+          <div style={{ marginTop: 64, aspectRatio: "16/7", position: "relative", overflow: "hidden" }}>
+            <img src="https://images.pexels.com/photos/18395403/pexels-photo-18395403.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Vie scolaire" style={{width:'100%',height:'100%',objectFit:'cover',display:'block'}} />
           </div>
         </Reveal>
       </div>
