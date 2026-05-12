@@ -196,61 +196,134 @@ const ETAB_TARIFS = [
   {
     name: "Externat Sainte-Thérèse",
     levels: "Maternelle · Primaire — Raon-l'Étape",
+    annee: "2026 — 2027",
     accent: "var(--acc-marine)",
+    qf: [
+      { tranche: "QF ≥ 11 150 €", value: "71 €" },
+      { tranche: "9 150 — 11 150 €", value: "65 €" },
+      { tranche: "7 750 — 9 150 €", value: "60 €" },
+      { tranche: "QF ≤ 7 750 €", value: "54 €" },
+    ],
     rates: [
-      { label: "Contribution scolaire annuelle", indic: true, value: "Sur demande", unit: "selon QF" },
-      { label: "Restauration & garderie", indic: true, value: "Sur demande", unit: "" }
+      { label: "Cantine · 1 jour / semaine", value: "23 €", unit: "/ mois" },
+      { label: "Cantine · 2 jours / semaine", value: "45 €", unit: "/ mois" },
+      { label: "Cantine · 3 jours / semaine", value: "67 €", unit: "/ mois" },
+      { label: "Cantine · 4 jours / semaine", value: "89 €", unit: "/ mois" },
+      { label: "Repas occasionnel", value: "6,50 €", unit: "/ repas" },
+      { label: "Garderie · tarif horaire", value: "2,90 €", unit: "/ heure" },
+      { label: "Garderie · forfait mensuel", value: "40 €", unit: "/ mois" },
     ],
     notes: [
-      <span><strong>Tarifs modulés selon le quotient familial</strong>. Réductions appliquées à partir du 2ᵉ enfant. Prendre contact avec la direction pour un devis personnalisé.</span>
+      <span>Facturation par <strong>prélèvements mensuels sur 10 mois</strong>, d'octobre à juillet. Frais de dossier <strong>30 €</strong> + arrhes <strong>30 €</strong> à l'inscription.</span>,
+      <span>Remises fratries : <strong>15 %</strong> sur le 2ᵉ enfant · <strong>20 %</strong> sur le 3ᵉ · <strong>25 %</strong> sur le 4ᵉ · <strong>30 %</strong> sur le 5ᵉ.</span>,
+    ],
+    pdfs: [
+      { label: "Conditions financières 2026 — 2027", url: "assets/Tarifs/conditions-financieres-26-27-Saint-Therese.pdf" }
     ],
     contact: { tel: "03 29 41 44 43", url: "https://externat-saintetherese.fr/", urlLabel: "externat-saintetherese.fr" }
   },
   {
     name: "Institution Sainte-Marie",
     levels: "Maternelle · Primaire · Collège — Saint-Dié",
+    annee: "2025 — 2026",
     accent: "var(--acc-brown)",
+    qfSections: [
+      {
+        title: "École",
+        qf: [
+          { tranche: "QF ≥ 11 150 €", value: "88 €" },
+          { tranche: "9 150 — 11 150 €", value: "83 €" },
+          { tranche: "7 750 — 9 150 €", value: "78 €" },
+          { tranche: "QF ≤ 7 750 €", value: "71 €" },
+        ]
+      },
+      {
+        title: "Collège",
+        qf: [
+          { tranche: "QF ≥ 11 150 €", value: "117 €" },
+          { tranche: "9 150 — 11 150 €", value: "107 €" },
+          { tranche: "7 750 — 9 150 €", value: "98 €" },
+          { tranche: "QF ≤ 7 750 €", value: "89 €" },
+        ]
+      }
+    ],
     rates: [
-      { label: "Contribution scolaire annuelle", indic: true, value: "Sur demande", unit: "facturation en septembre" },
-      { label: "Repas occasionnel au self", value: "6,35 €", unit: "/ repas" },
-      { label: "Garderie matinale", value: "2 €", unit: "/ heure (ou 1 € / 30 min)" }
+      { label: "Cantine · 1 jour / semaine", value: "26 €", unit: "/ mois" },
+      { label: "Cantine · 2 jours / semaine", value: "51 €", unit: "/ mois" },
+      { label: "Cantine · 3 jours / semaine", value: "77 €", unit: "/ mois" },
+      { label: "Cantine · 4 jours / semaine", value: "102 €", unit: "/ mois" },
+      { label: "Repas occasionnel", value: "7,50 €", unit: "/ repas" },
+      { label: "Garderie matin · forfait mensuel (école)", value: "15 €", unit: "/ mois" },
+      { label: "Garderie soir · forfait mensuel (école)", value: "33 €", unit: "/ mois" },
     ],
     notes: [
-      <span><strong>Facture annuelle prélevée sur 10 mois</strong>, d'octobre à juillet. Garderie disponible de 7h30 à 18h45, étude du soir incluse.</span>,
-      <span>Les absences pour convenances personnelles ne sont pas remboursées.</span>
+      <span>Facturation par <strong>prélèvements mensuels sur 10 mois</strong>. Frais de dossier <strong>30 €</strong>. Arrhes école : 100 € (externe) · 150 € (DP). Arrhes collège : 150 € (externe) · 200 € (DP).</span>,
+      <span>Remises fratries : <strong>15 %</strong> sur le 2ᵉ enfant · <strong>20 %</strong> sur le 3ᵉ · <strong>25 %</strong> sur le 4ᵉ · <strong>30 %</strong> sur le 5ᵉ.</span>,
+    ],
+    pdfs: [
+      { label: "Conditions école 2025 — 2026", url: "assets/Tarifs/Conditions-financieres-Ecole-Sainte-Marie-2025-26.pdf" },
+      { label: "Conditions collège 2025 — 2026", url: "assets/Tarifs/Conditions-financieres-College-Sainte-Marie-2025-26.pdf" },
     ],
     contact: { tel: "03 29 55 34 66", url: "https://www.saintemarie-stdie.fr/", urlLabel: "saintemarie-stdie.fr" }
   },
   {
     name: "Notre-Dame de la Providence",
     levels: "École · Collège · Lycée pro — Saint-Dié",
+    annee: "2026 — 2027",
     accent: "var(--acc-violet)",
+    qf: [
+      { tranche: "QF ≥ 11 150 €", value: "71 €" },
+      { tranche: "9 150 — 11 150 €", value: "65 €" },
+      { tranche: "7 750 — 9 150 €", value: "60 €" },
+      { tranche: "QF ≤ 7 750 €", value: "54 €" },
+    ],
     rates: [
-      { label: "Contribution scolaire", indic: true, value: "4 tranches QF", unit: "école & lycée pro · 3 tranches collège" },
-      { label: "Restauration · 4 repas / sem.", value: "102 €", unit: "/ mois" },
-      { label: "Repas avec Cité-PASS", value: "75 — 94 €", unit: "/ mois · Déodatiens" },
-      { label: "Repas occasionnel Cité-PASS", value: "5,30 — 6,60 €", unit: "/ repas" },
-      { label: "Garderie matin · 7h15-7h45", value: "103 €", unit: "/ an" },
-      { label: "Étude du soir · 16h30-18h30", value: "205 — 411 €", unit: "/ an · selon créneau" }
+      { label: "Cantine · 4 jours / sem. (hors Saint-Dié)", value: "103 €", unit: "/ mois" },
+      { label: "Cantine · 4 jours / sem. (Saint-Dié)", value: "89 €", unit: "/ mois" },
+      { label: "Cantine · 1 jour / sem. (hors Saint-Dié)", value: "27 €", unit: "/ mois" },
+      { label: "Cantine · 1 jour / sem. (Saint-Dié)", value: "23 €", unit: "/ mois" },
+      { label: "Repas occasionnel (hors Saint-Dié)", value: "7,50 €", unit: "/ repas" },
+      { label: "Repas occasionnel (Saint-Dié)", value: "6,50 €", unit: "/ repas" },
+      { label: "Garderie · tarif horaire", value: "2,50 €", unit: "/ heure" },
+      { label: "Garderie · forfait annuel (matin)", value: "103 €", unit: "/ an" },
+      { label: "Garderie · forfait annuel (16h30-18h30)", value: "411 €", unit: "/ an" },
     ],
     notes: [
-      <span><strong>Tarifs différenciés selon le quotient familial</strong> à partir de la rentrée 2024. Quatre tranches pour l'école et le lycée pro, trois tranches pour le collège.</span>,
-      <span>La <strong>Carte Cité-PASS</strong> permet aux enfants domiciliés à Saint-Dié de bénéficier de tarifs modulés sur la restauration.</span>
+      <span>Tarifs <strong>école 2026 — 2027</strong>. Les tarifs collège et lycée pro sont communiqués sur demande auprès de l'établissement. Frais de dossier <strong>30 €</strong> + arrhes <strong>30 €</strong>.</span>,
+      <span>Remises fratries : <strong>15 %</strong> sur le 2ᵉ enfant · <strong>20 %</strong> sur le 3ᵉ · <strong>25 %</strong> sur le 4ᵉ · <strong>30 %</strong> sur le 5ᵉ.</span>,
     ],
-    contact: { tel: "03 29 56 96 53", url: "https://institutionlaprovidence.fr/accueil/", urlLabel: "institutionlaprovidence.fr" }
+    pdfs: [
+      { label: "Conditions école 2026 — 2027", url: "assets/Tarifs/2026_2027_conditions_financieres_ecole_notre-dame-de-la-providence.pdf" }
+    ],
+    contact: { tel: "03 29 56 17 77", url: "https://institutionlaprovidence.fr/accueil/", urlLabel: "institutionlaprovidence.fr" }
   },
   {
     name: "Lycée Beau Jardin",
     levels: "2ⁿᵈᵉ · 1ʳᵉ · Tle · BTS — Saint-Dié",
+    annee: "2025 — 2026",
     accent: "var(--acc-green)",
+    qf: [
+      { tranche: "QF ≥ 11 150 €", value: "105 €" },
+      { tranche: "9 150 — 11 150 €", value: "99 €" },
+      { tranche: "7 750 — 9 150 €", value: "92 €" },
+      { tranche: "QF ≤ 7 750 €", value: "86 €" },
+    ],
     rates: [
-      { label: "Contribution scolaire annuelle", indic: true, value: "Sur demande", unit: "selon filière (général · STMG · BTS)" },
-      { label: "Demi-pension au self", indic: true, value: "Sur demande", unit: "" },
-      { label: "Internat (60 places)", indic: true, value: "Sur demande", unit: "filles & garçons" }
+      { label: "Demi-pension · 1 jour / semaine", value: "26 €", unit: "/ mois" },
+      { label: "Demi-pension · 2 jours / semaine", value: "51 €", unit: "/ mois" },
+      { label: "Demi-pension · 3 jours / semaine", value: "77 €", unit: "/ mois" },
+      { label: "Demi-pension · 4 jours / semaine", value: "102 €", unit: "/ mois" },
+      { label: "Repas occasionnel", value: "7,50 €", unit: "/ repas" },
+      { label: "Internat · chambre individuelle", value: "500 €", unit: "/ mois" },
+      { label: "Internat · chambre double / triple", value: "450 €", unit: "/ mois" },
+      { label: "Fournitures scolaires", value: "90 €", unit: "/ an" },
     ],
     notes: [
-      <span>Établissement <strong>sous contrat d'association</strong> avec l'État. Les <strong>bourses nationales du second degré</strong> et les bourses au mérite sont accessibles aux familles éligibles.</span>,
-      <span>L'internat accueille également les élèves de Notre-Dame de la Providence.</span>
+      <span>Frais de dossier <strong>40 €</strong>. Arrhes : <strong>150 €</strong> (externe) · <strong>200 €</strong> (demi-pensionnaire) · <strong>350 €</strong> (interne). L'internat (60 places) accueille aussi les élèves de Notre-Dame de la Providence.</span>,
+      <span>Remises fratries : <strong>15 %</strong> sur le 2ᵉ enfant · <strong>20 %</strong> sur le 3ᵉ · <strong>25 %</strong> sur le 4ᵉ · <strong>30 %</strong> sur le 5ᵉ. Ces tarifs <strong>s'ajoutent aux bourses d'État</strong> si vous êtes éligibles.</span>,
+    ],
+    pdfs: [
+      { label: "Conditions financières 2025 — 2026", url: "assets/Tarifs/Conditions_financières_Beau-Jardin_2025_2026.pdf" }
     ],
     contact: { tel: "03 29 56 13 52", url: "https://www.lycee-beaujardin.fr/", urlLabel: "lycee-beaujardin.fr" }
   }
@@ -290,7 +363,10 @@ const AIDES = [
 ];
 
 // ───── Tarifs page ─────
-function TarifsPage() {
+function TarifsPage({ onContact }) {
+  const [activeTab, setActiveTab] = useState(0);
+  const e = ETAB_TARIFS[activeTab];
+
   return (
     <>
       <section className="tarifs-hero">
@@ -347,46 +423,94 @@ function TarifsPage() {
           <Reveal className="etab-tarifs-head">
             <span className="eyebrow">Par établissement</span>
             <h2 className="h-section" style={{ marginTop: 14 }}>
-              Tarifs <em style={{ color: "var(--gold-warm)" }}>indicatifs</em> par établissement.
+              Tarifs <em style={{ color: "var(--gold-warm)" }}>officiels</em> par établissement.
             </h2>
-            <p className="lede" style={{ marginTop: 14 }}>
-              Les montants ci-dessous sont communiqués à titre informatif. Pour un devis personnalisé
-              tenant compte de votre quotient familial et du nombre d'enfants, contactez directement
-              l'établissement concerné.
-            </p>
           </Reveal>
-          {ETAB_TARIFS.map((e, i) => (
-            <Reveal key={e.name} className="etab-tarif" style={{ "--accent": e.accent }}>
-              <div className="etab-tarif-id">
-                <span className="num">0{i + 1} / 04</span>
-                <h3>{e.name}</h3>
-                <span className="levels">{e.levels}</span>
-                <span className="accent-bar"></span>
-                <div className="contact">
-                  {e.contact.tel}<br />
-                  <a href={e.contact.url} target="_blank" rel="noopener noreferrer">{e.contact.urlLabel} <Arrow /></a>
-                </div>
+
+          <div className="tarif-tabs">
+            {ETAB_TARIFS.map((t, i) => (
+              <button
+                key={t.name}
+                className={`tarif-tab ${i === activeTab ? "active" : ""}`}
+                style={{ "--tab-accent": t.accent }}
+                onClick={() => setActiveTab(i)}
+              >
+                <span className="tarif-tab-name">{t.name}</span>
+                <span className="tarif-tab-levels">{t.levels.split(" — ")[0]}</span>
+              </button>
+            ))}
+          </div>
+
+          <div className="etab-tarif" style={{ "--accent": e.accent }}>
+            <div className="etab-tarif-id">
+              <span className="num">0{activeTab + 1} / 04</span>
+              <h3>{e.name}</h3>
+              <span className="levels">{e.levels}</span>
+              {e.annee && <span className="etab-annee">{e.annee}</span>}
+              <span className="accent-bar"></span>
+              <div className="contact">
+                {e.contact.tel}<br />
+                <a href={e.contact.url} target="_blank" rel="noopener noreferrer">{e.contact.urlLabel} <Arrow /></a>
               </div>
-              <div className="etab-tarif-rates">
-                {e.rates.map((r, j) => (
+              {e.pdfs && (
+                <div className="pdf-links">
+                  {e.pdfs.map((pdf, j) => (
+                    <a key={j} href={pdf.url} target="_blank" rel="noopener noreferrer" className="pdf-link">
+                      <svg width="12" height="14" viewBox="0 0 12 14" fill="none">
+                        <path d="M1 1h7l3 3v9H1V1z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round"/>
+                        <path d="M8 1v3h3" stroke="currentColor" strokeWidth="1.2"/>
+                        <path d="M3 7h6M3 9.5h4" stroke="currentColor" strokeWidth="1" strokeLinecap="round"/>
+                      </svg>
+                      {pdf.label}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+            <div className="etab-tarif-rates">
+              <div className="rates-group">
+                <span className="rates-group-head">Contribution mensuelle · quotient familial</span>
+                {e.qf && e.qf.map((row, j) => (
                   <div className="row" key={j}>
-                    <span className="label">
-                      {r.label}
-                    </span>
-                    <span className={`value ${r.indic ? "indicative" : ""}`}>
-                      {r.value}
-                      {r.unit && <span className="unit">{r.unit}</span>}
-                    </span>
+                    <span className="label">{row.tranche}</span>
+                    <span className="value">{row.value}<span className="unit">/ mois</span></span>
                   </div>
                 ))}
-              </div>
-              <div className="etab-tarif-notes">
-                {e.notes.map((n, j) => (
-                  <p className="note" key={j}>{n}</p>
+                {e.qfSections && e.qfSections.map((section, j) => (
+                  <React.Fragment key={j}>
+                    <div className="row row-section-label">
+                      <span className="label"><em>{section.title}</em></span>
+                    </div>
+                    {section.qf.map((row, k) => (
+                      <div className="row" key={k}>
+                        <span className="label qf-indent">{row.tranche}</span>
+                        <span className="value">{row.value}<span className="unit">/ mois</span></span>
+                      </div>
+                    ))}
+                  </React.Fragment>
                 ))}
               </div>
-            </Reveal>
-          ))}
+              {e.rates && e.rates.length > 0 && (
+                <div className="rates-group">
+                  <span className="rates-group-head">Restauration &amp; périscolaire</span>
+                  {e.rates.map((r, j) => (
+                    <div className="row" key={j}>
+                      <span className="label">{r.label}</span>
+                      <span className="value">
+                        {r.value}
+                        {r.unit && <span className="unit">{r.unit}</span>}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+            <div className="etab-tarif-notes">
+              {e.notes.map((n, j) => (
+                <p className="note" key={j}>{n}</p>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -425,24 +549,119 @@ function TarifsPage() {
               <path d="M11 7v5M11 14.5v.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
             </svg>
             <p>
-              <strong>Information importante.</strong> Les tarifs publiés ici sont communiqués à titre
-              indicatif d'après les informations officielles de chaque établissement (rentrée 2024 — 2025
-              et suivantes). Ils peuvent évoluer chaque année. Pour un devis nominatif et personnalisé
-              tenant compte de votre situation familiale, merci de prendre directement attache avec la
-              direction de l'établissement concerné — un rendez-vous vous sera proposé dans les meilleurs
-              délais.
+              <strong>Information importante.</strong> Les tarifs publiés ici sont issus des documents
+              officiels de chaque établissement (rentrées 2025 — 2026 et 2026 — 2027 selon les
+              établissements). Ils peuvent évoluer chaque année. Pour un devis nominatif et personnalisé
+              tenant compte de votre quotient familial et de votre situation, merci de prendre directement
+              attache avec la direction de l'établissement concerné — un rendez-vous vous sera proposé
+              dans les meilleurs délais.
             </p>
           </div>
         </div>
       </section>
 
-      <Inscription />
+      <Inscription onContact={onContact} />
     </>
   );
 }
 
+// ───── Contact modal ─────
+function ContactModal({ onClose }) {
+  const [etab, setEtab] = useState('');
+  const [email, setEmail] = useState('');
+  const [objet, setObjet] = useState('');
+  const [message, setMessage] = useState('');
+
+  const handleBackdrop = (e) => { if (e.target === e.currentTarget) onClose(); };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const to = 'contact@marie-de-galilee.fr';
+    const subject = encodeURIComponent(`[${etab}] ${objet}`);
+    const body = encodeURIComponent(`Établissement : ${etab}\nDe : ${email}\n\n${message}`);
+    window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+  };
+
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [onClose]);
+
+  return (
+    <div className="modal-backdrop" onClick={handleBackdrop}>
+      <div className="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <button className="modal-close" onClick={onClose} aria-label="Fermer">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M2 2l12 12M14 2L2 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+          </svg>
+        </button>
+        <span className="eyebrow" style={{ color: 'var(--gold-warm)' }}>Nous écrire</span>
+        <h3 id="modal-title" className="modal-title">Prendre contact</h3>
+        <form onSubmit={handleSubmit} className="modal-form">
+          <div className="modal-field">
+            <label htmlFor="m-etab">Établissement</label>
+            <div className="modal-select-wrap">
+              <select id="m-etab" value={etab} onChange={e => setEtab(e.target.value)} required>
+                <option value="">Choisir un établissement…</option>
+                {ETABLISSEMENTS.map(e => (
+                  <option key={e.name} value={e.name}>{e.name}</option>
+                ))}
+                <option value="Direction générale">Direction générale</option>
+              </select>
+              <svg className="modal-select-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
+                <path d="M1 1l5 5 5-5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
+              </svg>
+            </div>
+          </div>
+          <div className="modal-field">
+            <label htmlFor="m-email">Votre adresse e-mail</label>
+            <input
+              id="m-email"
+              type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              placeholder="prenom.nom@exemple.fr"
+              required
+            />
+          </div>
+          <div className="modal-field">
+            <label htmlFor="m-objet">Objet</label>
+            <input
+              id="m-objet"
+              type="text"
+              value={objet}
+              onChange={e => setObjet(e.target.value)}
+              placeholder="Demande d'inscription, renseignement…"
+              required
+            />
+          </div>
+          <div className="modal-field">
+            <label htmlFor="m-message">Message</label>
+            <textarea
+              id="m-message"
+              value={message}
+              onChange={e => setMessage(e.target.value)}
+              placeholder="Votre message…"
+              required
+              rows={5}
+            />
+          </div>
+          <button type="submit" className="btn btn-gold" style={{ width: '100%', justifyContent: 'center' }}>
+            Envoyer <Arrow />
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
+
 // ───── Sections ─────
-function Nav({ open, setOpen, route }) {
+function Nav({ open, setOpen, route, onContact }) {
   const navTo = (e, target) => {
     if (route === 'tarifs') {
       e.preventDefault();
@@ -464,7 +683,7 @@ function Nav({ open, setOpen, route }) {
           <a href="#valeurs" onClick={(e)=>navTo(e,'valeurs')}>Nos valeurs</a>
           <a href="#tarifs" className={route==='tarifs'?'active':''}>Tarifs</a>
           <a href="#contact" onClick={(e)=>navTo(e,'contact')}>Contact</a>
-          <a href="#inscription" className="nav-cta" onClick={(e)=>navTo(e,'inscription')}>Inscription</a>
+          <button className="nav-cta" onClick={() => { setOpen(false); onContact && onContact(); }}>Inscription</button>
         </nav>
         <button
           className={`nav-burger ${open ? "open" : ""}`}
@@ -478,7 +697,7 @@ function Nav({ open, setOpen, route }) {
   );
 }
 
-function Hero({ showFloating }) {
+function Hero({ showFloating, onContact }) {
   return (
     <section className="hero">
       <div className="wrap hero-grid">
@@ -499,7 +718,7 @@ function Hero({ showFloating }) {
             <a href="#etablissements" className="btn btn-gold">
               Choisir mon établissement <Arrow />
             </a>
-            <a href="#inscription" className="btn btn-ghost">Prendre rendez-vous</a>
+            <button className="btn btn-ghost" onClick={() => onContact && onContact()}>Prendre rendez-vous</button>
           </div>
           <div className="hero-meta">
             <span className="badge">⊹ Inscriptions 2026 — 2027 ouvertes</span>
@@ -659,7 +878,7 @@ function Testimonial() {
   );
 }
 
-function Inscription() {
+function Inscription({ onContact }) {
   return (
     <section className="cta" id="inscription">
       <div className="wrap cta-inner">
@@ -675,9 +894,12 @@ function Inscription() {
             questions et vous faire visiter les lieux.
           </p>
           <div className="cta-actions">
-            <a href="#contact" className="btn btn-gold-on-dark">
+            <button
+              className="btn btn-gold-on-dark"
+              onClick={() => onContact && onContact()}
+            >
               Prendre contact <Arrow />
-            </a>
+            </button>
             <a href="#" className="btn-link">Télécharger la brochure ↓</a>
           </div>
         </Reveal>
@@ -811,6 +1033,7 @@ function useHashRoute() {
 function App() {
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
   const [navOpen, setNavOpen] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
   const route = useHashRoute();
   useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' }); }, [route]);
 
@@ -859,29 +1082,30 @@ function App() {
 
   return (
     <>
-      <Nav open={navOpen} setOpen={setNavOpen} route={route} />
+      <Nav open={navOpen} setOpen={setNavOpen} route={route} onContact={() => setContactOpen(true)} />
       <main>
-        {route === 'tarifs' ? <TarifsPage /> : (
+        {route === 'tarifs' ? <TarifsPage onContact={() => setContactOpen(true)} /> : (
           <>
             {t.heroLayout === "centré"
-              ? <HeroCentered showFloating={t.showFloatingCard} />
-              : <Hero showFloating={t.showFloatingCard} />}
+              ? <HeroCentered showFloating={t.showFloatingCard} onContact={() => setContactOpen(true)} />
+              : <Hero showFloating={t.showFloatingCard} onContact={() => setContactOpen(true)} />}
             <Stats />
             <Etablissements />
             <Valeurs />
             <Testimonial />
-            <Inscription />
+            <Inscription onContact={() => setContactOpen(true)} />
           </>
         )}
       </main>
       <Footer />
       <Tweaks t={t} setTweak={setTweak} />
+      {contactOpen && <ContactModal onClose={() => setContactOpen(false)} />}
     </>
   );
 }
 
 // Centered hero variant
-function HeroCentered({ showFloating }) {
+function HeroCentered({ showFloating, onContact }) {
   return (
     <section className="hero" style={{ paddingTop: 80, paddingBottom: 0 }}>
       <div className="wrap" style={{ textAlign: "center", maxWidth: 880 }}>
@@ -902,7 +1126,7 @@ function HeroCentered({ showFloating }) {
             <a href="#etablissements" className="btn btn-gold">
               Choisir mon établissement <Arrow />
             </a>
-            <a href="#inscription" className="btn btn-ghost">Prendre rendez-vous</a>
+            <button className="btn btn-ghost" onClick={() => onContact && onContact()}>Prendre rendez-vous</button>
           </div>
         </Reveal>
         <Reveal delay={150}>
