@@ -4,7 +4,11 @@
       "Bash(git mv *)",
       "WebSearch",
       "WebFetch(domain:unsplash.com)",
-      "WebFetch(domain:www.pexels.com)"
+      "WebFetch(domain:www.pexels.com)",
+      "Bash(mkdir -p /home/tom/Marie-de-galilee/providence)"
+    ],
+    "additionalDirectories": [
+      "/home/tom/Marie-de-galilee"
     ]
   }
 }

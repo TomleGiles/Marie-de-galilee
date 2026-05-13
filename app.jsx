@@ -36,10 +36,10 @@ const ETABLISSEMENTS = [
   },
   {
     name: "Institution Notre-Dame de la Providence",
-    levels: "Collège · Lycée pro",
+    levels: "École · Collège · Lycée pro",
     addr: "14 rue Pasteur\n88100 Saint-Dié-des-Vosges",
     tel: "03 29 56 13 12",
-    url: "https://institutionlaprovidence.fr/accueil/",
+    url: "providence/index.html",
     accent: "var(--acc-violet)",
     tone: "tone-violet",
     img: "https://images.pexels.com/photos/27093997/pexels-photo-27093997.jpeg?auto=compress&cs=tinysrgb&w=600"
@@ -945,7 +945,7 @@ function Footer() {
             <ul>
               <li><a href="https://externat-saintetherese.fr/" target="_blank" rel="noopener noreferrer">Externat Sainte-Thérèse</a></li>
               <li><a href="https://www.saintemarie-stdie.fr/" target="_blank" rel="noopener noreferrer">Institution Sainte-Marie</a></li>
-              <li><a href="https://institutionlaprovidence.fr/accueil/" target="_blank" rel="noopener noreferrer">Notre-Dame de la Providence</a></li>
+              <li><a href="providence/index.html">Notre-Dame de la Providence</a></li>
               <li><a href="https://www.lycee-beaujardin.fr/" target="_blank" rel="noopener noreferrer">Lycée Beau Jardin</a></li>
             </ul>
           </div>
